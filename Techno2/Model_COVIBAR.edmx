@@ -1,0 +1,974 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBCoviBarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMINISTRADOR">
+          <Key>
+            <PropertyRef Name="ID_admin" />
+          </Key>
+          <Property Name="ID_admin" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DNI" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CATEGORIAS">
+          <Key>
+            <PropertyRef Name="Id_Categorias" />
+          </Key>
+          <Property Name="Id_Categorias" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="DNI" />
+          </Key>
+          <Property Name="DNI" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nro_Compras" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COMPRA">
+          <Key>
+            <PropertyRef Name="ID_compra" />
+          </Key>
+          <Property Name="ID_compra" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Tipo_comprobante" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="serie_comprobante" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="numero_comprobante" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="ID_admin" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FECHA" Type="date" Nullable="false" />
+          <Property Name="ID_PROVEEDOR" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DETALLE_COMPRA">
+          <Key>
+            <PropertyRef Name="ID_Detalle_Compra" />
+          </Key>
+          <Property Name="ID_Detalle_Compra" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ID_COMPRA" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ID_Producto" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="precio_compra" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="precio_venta" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DETALLE_VENTA">
+          <Key>
+            <PropertyRef Name="ID_detalle_venta" />
+          </Key>
+          <Property Name="ID_detalle_venta" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID_venta" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Id_Producto" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="Precio_Venta" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="E_USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="NOMBRES" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CLAVE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ID_EMPLEADO" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="ID_empleado" />
+          </Key>
+          <Property Name="ID_empleado" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Telefono" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="Cargo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DNI" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCTOS">
+          <Key>
+            <PropertyRef Name="Id_Producto" />
+          </Key>
+          <Property Name="Id_Producto" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Id_Categoria" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="stock" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="ID_PROVEEDOR" />
+          </Key>
+          <Property Name="ID_PROVEEDOR" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CORREO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="RUC" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="DIRECCION" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FECHA" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_usuario" />
+          </Key>
+          <Property Name="ID_usuario" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Clave" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="ID_VENTA" />
+          </Key>
+          <Property Name="ID_VENTA" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TIPO_COMPROBANTE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="NRO_COMPROBANTE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FECHA" Type="date" Nullable="false" />
+          <Property Name="DNI" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="ID_EMPLEADO" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBCoviBar.sys.database_firewall_rules' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FKC_ID_admini">
+          <End Role="ADMINISTRADOR" Type="Self.ADMINISTRADOR" Multiplicity="1" />
+          <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADMINISTRADOR">
+              <PropertyRef Name="ID_admin" />
+            </Principal>
+            <Dependent Role="COMPRA">
+              <PropertyRef Name="ID_admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKC_ID_PROVEEDOR">
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+          <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Principal>
+            <Dependent Role="COMPRA">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKD_ID_COMPRA">
+          <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="1" />
+          <End Role="DETALLE_COMPRA" Type="Self.DETALLE_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPRA">
+              <PropertyRef Name="ID_compra" />
+            </Principal>
+            <Dependent Role="DETALLE_COMPRA">
+              <PropertyRef Name="ID_COMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKD_ID_Producto">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="DETALLE_COMPRA" Type="Self.DETALLE_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="Id_Producto" />
+            </Principal>
+            <Dependent Role="DETALLE_COMPRA">
+              <PropertyRef Name="ID_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEU_ID_EMPLEADO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="E_USUARIO" Type="Self.E_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="ID_empleado" />
+            </Principal>
+            <Dependent Role="E_USUARIO">
+              <PropertyRef Name="ID_EMPLEADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKP_ID_Categoria">
+          <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="1" />
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIAS">
+              <PropertyRef Name="Id_Categorias" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="Id_Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKV_DNI">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="DNI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKV_ID_EMPLEADO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="ID_empleado" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="ID_EMPLEADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FRP_Id_Producto">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="Id_Producto" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="Id_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FRV_ID_VENTA">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1" />
+          <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="ID_VENTA" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="ID_venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="DBCoviBarModelStoreContainer">
+          <EntitySet Name="ADMINISTRADOR" EntityType="Self.ADMINISTRADOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORIAS" EntityType="Self.CATEGORIAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPRA" EntityType="Self.COMPRA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLE_COMPRA" EntityType="Self.DETALLE_COMPRA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLE_VENTA" EntityType="Self.DETALLE_VENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="E_USUARIO" EntityType="Self.E_USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTA" EntityType="Self.VENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FKC_ID_admini" Association="Self.FKC_ID_admini">
+            <End Role="ADMINISTRADOR" EntitySet="ADMINISTRADOR" />
+            <End Role="COMPRA" EntitySet="COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FKC_ID_PROVEEDOR" Association="Self.FKC_ID_PROVEEDOR">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="COMPRA" EntitySet="COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FKD_ID_COMPRA" Association="Self.FKD_ID_COMPRA">
+            <End Role="COMPRA" EntitySet="COMPRA" />
+            <End Role="DETALLE_COMPRA" EntitySet="DETALLE_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FKD_ID_Producto" Association="Self.FKD_ID_Producto">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="DETALLE_COMPRA" EntitySet="DETALLE_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FKEU_ID_EMPLEADO" Association="Self.FKEU_ID_EMPLEADO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="E_USUARIO" EntitySet="E_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FKP_ID_Categoria" Association="Self.FKP_ID_Categoria">
+            <End Role="CATEGORIAS" EntitySet="CATEGORIAS" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FKV_DNI" Association="Self.FKV_DNI">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FKV_ID_EMPLEADO" Association="Self.FKV_ID_EMPLEADO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FRP_Id_Producto" Association="Self.FRP_Id_Producto">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FRV_ID_VENTA" Association="Self.FRV_ID_VENTA">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBCoviBarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADMINISTRADOR">
+          <Key>
+            <PropertyRef Name="ID_admin" />
+          </Key>
+          <Property Name="ID_admin" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombres" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DNI" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="COMPRA" Relationship="Self.FKC_ID_admini" FromRole="ADMINISTRADOR" ToRole="COMPRA" />
+        </EntityType>
+        <EntityType Name="CATEGORIAS">
+          <Key>
+            <PropertyRef Name="Id_Categorias" />
+          </Key>
+          <Property Name="Id_Categorias" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="Self.FKP_ID_Categoria" FromRole="CATEGORIAS" ToRole="PRODUCTOS" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="DNI" />
+          </Key>
+          <Property Name="DNI" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Nombres" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nro_Compras" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FKV_DNI" FromRole="CLIENTE" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="COMPRA">
+          <Key>
+            <PropertyRef Name="ID_compra" />
+          </Key>
+          <Property Name="ID_compra" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tipo_comprobante" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="serie_comprobante" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="numero_comprobante" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ID_admin" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ID_PROVEEDOR" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ADMINISTRADOR" Relationship="Self.FKC_ID_admini" FromRole="COMPRA" ToRole="ADMINISTRADOR" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Self.FKC_ID_PROVEEDOR" FromRole="COMPRA" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="DETALLE_COMPRA" Relationship="Self.FKD_ID_COMPRA" FromRole="COMPRA" ToRole="DETALLE_COMPRA" />
+        </EntityType>
+        <EntityType Name="DETALLE_COMPRA">
+          <Key>
+            <PropertyRef Name="ID_Detalle_Compra" />
+          </Key>
+          <Property Name="ID_Detalle_Compra" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_COMPRA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Producto" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precio_compra" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precio_venta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="COMPRA" Relationship="Self.FKD_ID_COMPRA" FromRole="DETALLE_COMPRA" ToRole="COMPRA" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="Self.FKD_ID_Producto" FromRole="DETALLE_COMPRA" ToRole="PRODUCTOS" />
+        </EntityType>
+        <EntityType Name="DETALLE_VENTA">
+          <Key>
+            <PropertyRef Name="ID_detalle_venta" />
+          </Key>
+          <Property Name="ID_detalle_venta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_venta" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_Producto" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Precio_Venta" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="Self.FRP_Id_Producto" FromRole="DETALLE_VENTA" ToRole="PRODUCTOS" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FRV_ID_VENTA" FromRole="DETALLE_VENTA" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="E_USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRES" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CLAVE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_EMPLEADO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FKEU_ID_EMPLEADO" FromRole="E_USUARIO" ToRole="EMPLEADO" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="ID_empleado" />
+          </Key>
+          <Property Name="ID_empleado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombres" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Cargo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DNI" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="E_USUARIO" Relationship="Self.FKEU_ID_EMPLEADO" FromRole="EMPLEADO" ToRole="E_USUARIO" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FKV_ID_EMPLEADO" FromRole="EMPLEADO" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="PRODUCTOS">
+          <Key>
+            <PropertyRef Name="Id_Producto" />
+          </Key>
+          <Property Name="Id_Producto" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_Categoria" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stock" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CATEGORIAS" Relationship="Self.FKP_ID_Categoria" FromRole="PRODUCTOS" ToRole="CATEGORIAS" />
+          <NavigationProperty Name="DETALLE_COMPRA" Relationship="Self.FKD_ID_Producto" FromRole="PRODUCTOS" ToRole="DETALLE_COMPRA" />
+          <NavigationProperty Name="DETALLE_VENTA" Relationship="Self.FRP_Id_Producto" FromRole="PRODUCTOS" ToRole="DETALLE_VENTA" />
+        </EntityType>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="ID_PROVEEDOR" />
+          </Key>
+          <Property Name="ID_PROVEEDOR" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CORREO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RUC" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="COMPRA" Relationship="Self.FKC_ID_PROVEEDOR" FromRole="PROVEEDOR" ToRole="COMPRA" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_usuario" />
+          </Key>
+          <Property Name="ID_usuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombres" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Clave" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="ID_VENTA" />
+          </Key>
+          <Property Name="ID_VENTA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TIPO_COMPROBANTE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NRO_COMPROBANTE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DNI" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ID_EMPLEADO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FKV_DNI" FromRole="VENTA" ToRole="CLIENTE" />
+          <NavigationProperty Name="DETALLE_VENTA" Relationship="Self.FRV_ID_VENTA" FromRole="VENTA" ToRole="DETALLE_VENTA" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FKV_ID_EMPLEADO" FromRole="VENTA" ToRole="EMPLEADO" />
+        </EntityType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FKC_ID_admini">
+          <End Role="ADMINISTRADOR" Type="Self.ADMINISTRADOR" Multiplicity="1" />
+          <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADMINISTRADOR">
+              <PropertyRef Name="ID_admin" />
+            </Principal>
+            <Dependent Role="COMPRA">
+              <PropertyRef Name="ID_admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKP_ID_Categoria">
+          <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="1" />
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIAS">
+              <PropertyRef Name="Id_Categorias" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="Id_Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKV_DNI">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="DNI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKC_ID_PROVEEDOR">
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+          <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Principal>
+            <Dependent Role="COMPRA">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKD_ID_COMPRA">
+          <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="1" />
+          <End Role="DETALLE_COMPRA" Type="Self.DETALLE_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPRA">
+              <PropertyRef Name="ID_compra" />
+            </Principal>
+            <Dependent Role="DETALLE_COMPRA">
+              <PropertyRef Name="ID_COMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKD_ID_Producto">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="DETALLE_COMPRA" Type="Self.DETALLE_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="Id_Producto" />
+            </Principal>
+            <Dependent Role="DETALLE_COMPRA">
+              <PropertyRef Name="ID_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FRP_Id_Producto">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="Id_Producto" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="Id_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FRV_ID_VENTA">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1" />
+          <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="ID_VENTA" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="ID_venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEU_ID_EMPLEADO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="E_USUARIO" Type="Self.E_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="ID_empleado" />
+            </Principal>
+            <Dependent Role="E_USUARIO">
+              <PropertyRef Name="ID_EMPLEADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKV_ID_EMPLEADO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="ID_empleado" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="ID_EMPLEADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBCoviBarEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMINISTRADOR" EntityType="Self.ADMINISTRADOR" />
+          <EntitySet Name="CATEGORIAS" EntityType="Self.CATEGORIAS" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
+          <EntitySet Name="COMPRA" EntityType="Self.COMPRA" />
+          <EntitySet Name="DETALLE_COMPRA" EntityType="Self.DETALLE_COMPRA" />
+          <EntitySet Name="DETALLE_VENTA" EntityType="Self.DETALLE_VENTA" />
+          <EntitySet Name="E_USUARIO" EntityType="Self.E_USUARIO" />
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
+          <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" />
+          <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <EntitySet Name="VENTA" EntityType="Self.VENTA" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+          <AssociationSet Name="FKC_ID_admini" Association="Self.FKC_ID_admini">
+            <End Role="ADMINISTRADOR" EntitySet="ADMINISTRADOR" />
+            <End Role="COMPRA" EntitySet="COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FKP_ID_Categoria" Association="Self.FKP_ID_Categoria">
+            <End Role="CATEGORIAS" EntitySet="CATEGORIAS" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FKV_DNI" Association="Self.FKV_DNI">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FKC_ID_PROVEEDOR" Association="Self.FKC_ID_PROVEEDOR">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="COMPRA" EntitySet="COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FKD_ID_COMPRA" Association="Self.FKD_ID_COMPRA">
+            <End Role="COMPRA" EntitySet="COMPRA" />
+            <End Role="DETALLE_COMPRA" EntitySet="DETALLE_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FKD_ID_Producto" Association="Self.FKD_ID_Producto">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="DETALLE_COMPRA" EntitySet="DETALLE_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FRP_Id_Producto" Association="Self.FRP_Id_Producto">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FRV_ID_VENTA" Association="Self.FRV_ID_VENTA">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FKEU_ID_EMPLEADO" Association="Self.FKEU_ID_EMPLEADO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="E_USUARIO" EntitySet="E_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FKV_ID_EMPLEADO" Association="Self.FKV_ID_EMPLEADO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DBCoviBarModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DBCoviBarModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBCoviBarModelStoreContainer" CdmEntityContainer="DBCoviBarEntities">
+          <EntitySetMapping Name="ADMINISTRADOR">
+            <EntityTypeMapping TypeName="DBCoviBarModel.ADMINISTRADOR">
+              <MappingFragment StoreEntitySet="ADMINISTRADOR">
+                <ScalarProperty Name="ID_admin" ColumnName="ID_admin" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORIAS">
+            <EntityTypeMapping TypeName="DBCoviBarModel.CATEGORIAS">
+              <MappingFragment StoreEntitySet="CATEGORIAS">
+                <ScalarProperty Name="Id_Categorias" ColumnName="Id_Categorias" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="DBCoviBarModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nro_Compras" ColumnName="Nro_Compras" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPRA">
+            <EntityTypeMapping TypeName="DBCoviBarModel.COMPRA">
+              <MappingFragment StoreEntitySet="COMPRA">
+                <ScalarProperty Name="ID_compra" ColumnName="ID_compra" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Tipo_comprobante" ColumnName="Tipo_comprobante" />
+                <ScalarProperty Name="serie_comprobante" ColumnName="serie_comprobante" />
+                <ScalarProperty Name="numero_comprobante" ColumnName="numero_comprobante" />
+                <ScalarProperty Name="ID_admin" ColumnName="ID_admin" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_PROVEEDOR" ColumnName="ID_PROVEEDOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_COMPRA">
+            <EntityTypeMapping TypeName="DBCoviBarModel.DETALLE_COMPRA">
+              <MappingFragment StoreEntitySet="DETALLE_COMPRA">
+                <ScalarProperty Name="ID_Detalle_Compra" ColumnName="ID_Detalle_Compra" />
+                <ScalarProperty Name="ID_COMPRA" ColumnName="ID_COMPRA" />
+                <ScalarProperty Name="ID_Producto" ColumnName="ID_Producto" />
+                <ScalarProperty Name="precio_compra" ColumnName="precio_compra" />
+                <ScalarProperty Name="precio_venta" ColumnName="precio_venta" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_VENTA">
+            <EntityTypeMapping TypeName="DBCoviBarModel.DETALLE_VENTA">
+              <MappingFragment StoreEntitySet="DETALLE_VENTA">
+                <ScalarProperty Name="ID_detalle_venta" ColumnName="ID_detalle_venta" />
+                <ScalarProperty Name="ID_venta" ColumnName="ID_venta" />
+                <ScalarProperty Name="Id_Producto" ColumnName="Id_Producto" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="Precio_Venta" ColumnName="Precio_Venta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="E_USUARIO">
+            <EntityTypeMapping TypeName="DBCoviBarModel.E_USUARIO">
+              <MappingFragment StoreEntitySet="E_USUARIO">
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
+                <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
+                <ScalarProperty Name="ID_EMPLEADO" ColumnName="ID_EMPLEADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLEADO">
+            <EntityTypeMapping TypeName="DBCoviBarModel.EMPLEADO">
+              <MappingFragment StoreEntitySet="EMPLEADO">
+                <ScalarProperty Name="ID_empleado" ColumnName="ID_empleado" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTOS">
+            <EntityTypeMapping TypeName="DBCoviBarModel.PRODUCTOS">
+              <MappingFragment StoreEntitySet="PRODUCTOS">
+                <ScalarProperty Name="Id_Producto" ColumnName="Id_Producto" />
+                <ScalarProperty Name="Id_Categoria" ColumnName="Id_Categoria" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVEEDOR">
+            <EntityTypeMapping TypeName="DBCoviBarModel.PROVEEDOR">
+              <MappingFragment StoreEntitySet="PROVEEDOR">
+                <ScalarProperty Name="ID_PROVEEDOR" ColumnName="ID_PROVEEDOR" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="RUC" ColumnName="RUC" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DBCoviBarModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="DBCoviBarModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="ID_usuario" ColumnName="ID_usuario" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTA">
+            <EntityTypeMapping TypeName="DBCoviBarModel.VENTA">
+              <MappingFragment StoreEntitySet="VENTA">
+                <ScalarProperty Name="ID_VENTA" ColumnName="ID_VENTA" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="TIPO_COMPROBANTE" ColumnName="TIPO_COMPROBANTE" />
+                <ScalarProperty Name="NRO_COMPROBANTE" ColumnName="NRO_COMPROBANTE" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="ID_EMPLEADO" ColumnName="ID_EMPLEADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="DBCoviBarModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DBCoviBarModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DBCoviBarModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DBCoviBarModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DBCoviBarModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBCoviBarModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="DBCoviBarModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBCoviBarModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DBCoviBarModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DBCoviBarModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

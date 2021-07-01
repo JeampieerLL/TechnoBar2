@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="576aded48b804fa6a97f4f77fdd03d0d" Name="Diagram1">
+        <EntityTypeShape EntityType="DBCoviBarModel.ADMINISTRADOR" Width="1.5" PointX="8.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCoviBarModel.CATEGORIAS" Width="1.5" PointX="3.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCoviBarModel.CLIENTE" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCoviBarModel.COMPRA" Width="1.5" PointX="11" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCoviBarModel.DETALLE_COMPRA" Width="1.5" PointX="13.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCoviBarModel.DETALLE_VENTA" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCoviBarModel.E_USUARIO" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCoviBarModel.EMPLEADO" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCoviBarModel.PRODUCTOS" Width="1.5" PointX="6" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCoviBarModel.PROVEEDOR" Width="1.5" PointX="8.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCoviBarModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCoviBarModel.USUARIO" Width="1.5" PointX="2.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCoviBarModel.VENTA" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCoviBarModel.database_firewall_rules" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <AssociationConnector Association="DBCoviBarModel.FKC_ID_admini" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCoviBarModel.FKP_ID_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCoviBarModel.FKV_DNI" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCoviBarModel.FKC_ID_PROVEEDOR" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCoviBarModel.FKD_ID_COMPRA" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCoviBarModel.FKD_ID_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCoviBarModel.FRP_Id_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCoviBarModel.FRV_ID_VENTA" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCoviBarModel.FKEU_ID_EMPLEADO" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCoviBarModel.FKV_ID_EMPLEADO" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
